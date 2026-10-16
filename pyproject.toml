@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iot-gap-geometry"
+version = "0.1.0"
+description = "Reproducible figures and interactive experiments for inverse optimal transport gap geometry"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+authors = [
+  {name = "Gabriel Peyré"},
+  {name = "Clarice Poon"},
+  {name = "Oscar Tron"},
+]
+dependencies = ["numpy>=1.26", "scipy>=1.11", "matplotlib>=3.8"]
+
+[project.urls]
+Repository = "https://github.com/gpeyre/iot-curvature"
+Issues = "https://github.com/gpeyre/iot-curvature/issues"
+
+[project.optional-dependencies]
+notebooks = ["notebook>=7", "nbformat>=5.9", "nbclient>=0.10", "ipykernel>=6.29", "ipywidgets>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

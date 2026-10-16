@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying manuscript when using these experiments."
+title: "Second-order geometry of optimal transport: cost identifiability and stability — numerical companion"
+type: software
+license: MIT
+repository-code: "https://github.com/gpeyre/iot-curvature"
+url: "https://github.com/gpeyre/iot-curvature"
+version: 0.1.0
+date-released: 2026-10-16
+authors:
+  - family-names: Peyré
+    given-names: Gabriel
+  - family-names: Poon
+    given-names: Clarice
+  - family-names: Tron
+    given-names: Oscar
+
