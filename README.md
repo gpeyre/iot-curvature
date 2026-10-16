@@ -12,13 +12,14 @@ How can an optimal pairing identify the cost that generated it? These experiment
 
 | You want to… | Open / run |
 |---|---|
+| Browse the project, figures, notebooks and demo from one page | [Website guide](docs/README.md); the homepage is `docs/index.html` |
 | Read the mathematical setup and experiment settings | [Figure guide](figures/README.md) |
 | Re-render all article figures from the included raw data | `python figures/reproduce.py --render-only` |
 | Recompute the full article experiments | `python figures/reproduce.py --workers 4` |
 | Explore maps, perturbations, and δ² rescaling | [Notebook 01](notebooks/01_models_and_gap.ipynb) |
 | Compare true-plan pairs with independently matched clouds | [Notebook 02](notebooks/02_sampling_and_plateaus.ipynb) |
 | Inspect the full-size data and publication assets | [Notebook 03](notebooks/03_article_data_and_figures.ipynb) |
-| Move the points and cost sliders in your browser | [Interactive experiments](docs/README.md), served locally or deployed with GitHub Pages |
+| Move the points and cost sliders in your browser | [Interactive demo](docs/demo.html), served locally or deployed with GitHub Pages |
 
 The repository contains the code, data and mathematical specifications needed to reproduce all four article figures.
 
@@ -96,17 +97,28 @@ The notebooks find this repository from their own location. They run quickly at 
 python scripts/check_notebooks.py
 ```
 
-## Browser experiments and GitHub Pages
+## Project website and interactive demo
+
+The repository includes a project homepage that introduces the paper and gives direct access to the interactive demo, publication figures, exploratory notebooks and source code on GitHub. The homepage and demo are static files: **no installation, backend or build step is required**.
+
+To preview the site from the repository root:
 
 ```sh
 python -m http.server 8000 --directory docs
 ```
 
-Open **http://localhost:8000**. The site works without a backend, build step or external CDN. It includes linked point clouds and gap curves, the cost slider, point count and perturbation controls, new samples, reference pairs, a δ² scale option, and a comparison of **true-plan pairs** with an **empirical OT reference between independent marginal samples**. Exact Hungarian assignments run in a worker so the controls remain responsive.
+Open **http://localhost:8000/** for the homepage, or **http://localhost:8000/demo.html** for the demo. The demo includes linked point clouds and gap curves, the cost slider, point count and perturbation controls, new samples, reference pairs, a δ² scale option, and a comparison of **true-plan pairs** with an **empirical OT reference between independent marginal samples**. Exact Hungarian assignments run in a worker so the controls remain responsive. No external CDN is used.
 
 The browser uses smaller samples and its own documented random generator. It explores the same mathematics; its random clouds are not the article samples. See [interactive documentation](docs/README.md).
 
-To deploy the experiments to [gpeyre.github.io/iot-curvature](https://gpeyre.github.io/iot-curvature/), select the repository's default branch and the **`/docs`** folder in **Settings → Pages → Deploy from a branch**. The site supports project subpaths. The design is inspired by [Gabriel Peyré's interactive gap-loss post](https://www.gpeyre.com/blog/2026/10/03/inverse-optimisation-gap-loss/).
+To publish the site after uploading this repository:
+
+1. Open **Settings → Pages** on GitHub.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select **`main`** and **`/docs`**, then click **Save**.
+4. Wait for GitHub's Pages deployment to finish; the Pages settings show its status and published URL.
+
+The intended homepage URL is **https://gpeyre.github.io/iot-curvature/**, and the demo URL is **https://gpeyre.github.io/iot-curvature/demo.html**. These URLs become available after Pages has been enabled and deployment succeeds. Subsequent pushes to `main` update the site automatically. All required site assets are committed in `docs/`; uploading the repository is sufficient. The site supports project subpaths. The demo is inspired by [Gabriel Peyré's interactive gap-loss post](https://www.gpeyre.com/blog/2026/10/03/inverse-optimisation-gap-loss/).
 
 ## Checks and manuscript integration
 
@@ -117,6 +129,7 @@ python -m unittest discover -s tests -v
 python scripts/check_data.py
 node docs/test_math.mjs
 python scripts/check_browser_math.py
+python scripts/check_site.py
 ```
 
 The checks cover brute-force small assignments, the loss sign and 1/n normalization, zero baseline and true-cost gaps, convexity, the radial CDF, seeds, committed-data integrity, and agreement between browser and SciPy objectives. The GitHub workflow runs the numerical tests and notebook execution; it does not rerun the expensive full experiment on every push.
@@ -135,7 +148,7 @@ This copies the four publication PDFs to `Pictures/generated/` in the chosen man
 src/iot_gap/       Shared Python maps, sampling, assignments and gap
 figures/          Exact article protocol, raw data and vector exports
 notebooks/        Three guided explorations
-docs/             Standalone interactive website for GitHub Pages
+docs/             Project homepage, interactive demo and site assets
 tests/            Mathematical and numerical invariants
 scripts/          Notebook, data, browser and manuscript checks
 ```

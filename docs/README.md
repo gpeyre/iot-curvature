@@ -1,6 +1,8 @@
-# Interactive inverse optimal transport
+# Project website and interactive inverse optimal transport
 
-A static, dependency-free companion to *Second-order geometry of optimal transport: cost identifiability and stability*. Open `index.html` through a local web server or deploy this directory with GitHub Pages. Nothing is uploaded and no external fonts, scripts, or services are loaded.
+A static, dependency-free companion to *Second-order geometry of optimal transport: cost identifiability and stability*. The homepage, `index.html`, introduces the project and links to the demo, article figures, Jupyter notebooks and repository source. The interactive experiment is in `demo.html`.
+
+No installation, build step or backend is needed. All required assets are committed in this directory. The site does not upload experiment data or load external fonts, scripts or services; links to GitHub open the corresponding repository content.
 
 ## Run locally
 
@@ -10,9 +12,18 @@ From the repository root:
 python -m http.server 8000 --directory docs
 ```
 
-Then open <http://localhost:8000>. Direct `file://` opening does not work reliably because browsers restrict module workers. The app uses modern browser ES modules, SVG, and web workers. It has no installation or build step.
+Then open <http://localhost:8000/> for the homepage or <http://localhost:8000/demo.html> for the demo. Direct `file://` opening of the demo does not work reliably because browsers restrict module workers. The app uses modern browser ES modules, SVG, and web workers.
 
-For GitHub Pages, choose **Deploy from a branch**, the repository's default branch, and the **`/docs`** folder. Publishing is a separate action; this repository does not publish automatically.
+## Publish with GitHub Pages
+
+After uploading the repository to `gpeyre/iot-curvature`:
+
+1. Open the repository's **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Choose branch **`main`**, folder **`/docs`**, then click **Save**.
+4. Wait for the Pages deployment to succeed. The settings page displays the published address and deployment status.
+
+The intended homepage is <https://gpeyre.github.io/iot-curvature/> and the demo is <https://gpeyre.github.io/iot-curvature/demo.html>. These addresses become available when the first deployment succeeds; this repository does not enable Pages on your behalf. Once enabled, later pushes to `main` update the site. Relative asset and navigation links support the `/iot-curvature/` project subpath.
 
 ## What is computed
 
@@ -44,11 +55,14 @@ The deterministic browser generator is Mulberry32 plus Box–Muller, with an ind
 
 | File | Purpose |
 | --- | --- |
-| `index.html`, `styles.css` | Accessible, responsive interface and mathematical description |
+| `index.html`, `landing.css` | Project homepage with access to the demo and GitHub content |
+| `demo.html`, `styles.css` | Accessible, responsive experiment interface and mathematical description |
+| `assets/` | Committed images used by the project homepage |
 | `app.mjs` | SVG rendering, controls, status, CSV export |
 | `worker.mjs` | Background sampling and exact assignment evaluations |
 | `math.mjs` | Pure deterministic mathematical kernel, no DOM dependencies |
 | `test_math.mjs` | Brute-force assignment validation and model checks |
+| `favicon.svg`, `.nojekyll` | Site icon and static GitHub Pages configuration |
 
 ```js
 import {sampleData, solveAt, curve} from './docs/math.mjs';
@@ -72,3 +86,14 @@ node docs/test_math.mjs
 They compare 84 random assignment problems of sizes 1–7 against exhaustive permutations; check convexity and optimality at `u=1/2` in all four model/protocol combinations; check the exactly degenerate paired identity baseline; verify annulus radii and Gaussian sampling moments; and time one 160-point curve.
 
 The interaction is inspired by [Gabriel Peyré's post on the convexity of the inverse gap loss](https://www.gpeyre.com/blog/2026/10/03/inverse-optimisation-gap-loss/). This implementation is independently written and uses the manuscript's cosine and radial transport models.
+
+## Update the website assets
+
+The committed website is ready to serve. After changing the publication figures, refresh the copied previews and the small numerical illustration with:
+
+```sh
+python scripts/prepare_site.py
+python scripts/check_site.py
+```
+
+The illustration uses an annulus sample with `n=60`, NumPy seed 7, and the candidate cost `u=0.85`. Its gap curve contains 41 exact assignment evaluations. The four publication previews are direct copies of their generated PNG exports. The static-site check verifies their checksums, local links, page anchors and module dependencies, including compatibility with the GitHub Pages project subpath.

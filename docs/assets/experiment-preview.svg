@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 490" role="img" aria-labelledby="preview-title preview-desc">
+<title id="preview-title">Paired annulus transport and its empirical gap</title>
+<desc id="preview-desc">Sixty independent Gaussian source points and their radial annulus images, using seed seven. Lines show the exact optimal assignment for the cost matrix diag(0.85, 0.15). Source and target clouds use the same coordinate scale and are translated apart. The lower graph shows the mean score improvement over the observed pairing at forty-one equally spaced cost parameters, with the selected parameter highlighted. Lines between evaluated losses are visual guides.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif} .title{font-family:Georgia,"Times New Roman",serif} .tick{font-size:10px;fill:#647477} .label{font-size:10px;letter-spacing:1.5px;fill:#647477}</style>
+<rect width="560" height="490" rx="18" fill="#fafbf8"/>
+<text class="title" x="30" y="34" font-size="21" fill="#253b3d">An observed pairing, a changing cost</text>
+<text x="30" y="57" font-size="12" fill="#647477">n = 60 · u = 0.85</text>
+<text class="label" x="139" y="87" text-anchor="middle">SOURCE</text>
+<text class="label" x="413" y="87" text-anchor="middle">TARGET</text>
+<g stroke="#087f80" stroke-width=".85" opacity=".27">
+<line x1="139.042" y1="166.843" x2="413.112" y2="149.724"/>
+<line x1="129.679" y1="207.280" x2="404.081" y2="203.362"/>
+<line x1="123.541" y1="210.716" x2="394.582" y2="199.205"/>
+<line x1="141.045" y1="131.433" x2="414.265" y2="148.807"/>
+<line x1="122.265" y1="198.096" x2="394.809" y2="197.490"/>
+<line x1="155.655" y1="164.866" x2="435.220" y2="160.811"/>
+<line x1="142.584" y1="208.636" x2="416.131" y2="204.639"/>
+<line x1="138.005" y1="153.360" x2="411.841" y2="149.450"/>
+<line x1="93.297" y1="192.559" x2="386.008" y2="182.166"/>
+<line x1="74.358" y1="220.844" x2="384.799" y2="183.036"/>
+<line x1="76.381" y1="184.993" x2="385.162" y2="179.132"/>
+<line x1="95.907" y1="167.777" x2="385.445" y2="171.103"/>
+<line x1="144.330" y1="183.356" x2="421.050" y2="203.582"/>
+<line x1="53.430" y1="195.316" x2="384.626" y2="180.622"/>
+<line x1="137.351" y1="173.147" x2="410.267" y2="149.585"/>
+<line x1="86.975" y1="193.244" x2="385.853" y2="185.476"/>
+<line x1="105.730" y1="204.500" x2="388.656" y2="191.616"/>
+<line x1="175.071" y1="204.456" x2="435.450" y2="194.088"/>
+<line x1="137.894" y1="146.931" x2="411.980" y2="149.257"/>
+<line x1="119.158" y1="180.798" x2="390.633" y2="192.869"/>
+<line x1="142.756" y1="174.831" x2="423.550" y2="151.678"/>
+<line x1="97.348" y1="174.411" x2="384.942" y2="175.256"/>
+<line x1="185.200" y1="229.603" x2="438.732" y2="189.086"/>
+<line x1="168.219" y1="172.942" x2="436.568" y2="163.392"/>
+<line x1="117.190" y1="108.986" x2="402.291" y2="151.982"/>
+<line x1="164.917" y1="217.776" x2="431.940" y2="198.565"/>
+<line x1="141.534" y1="157.393" x2="416.520" y2="149.755"/>
+<line x1="132.581" y1="153.781" x2="405.650" y2="150.411"/>
+<line x1="136.738" y1="154.314" x2="408.399" y2="148.981"/>
+<line x1="187.910" y1="199.973" x2="438.843" y2="185.852"/>
+<line x1="145.907" y1="192.752" x2="424.006" y2="202.103"/>
+<line x1="143.327" y1="217.365" x2="415.993" y2="204.919"/>
+<line x1="119.304" y1="183.671" x2="390.664" y2="193.756"/>
+<line x1="169.558" y1="138.062" x2="437.619" y2="163.212"/>
+<line x1="94.000" y1="204.018" x2="386.956" y2="185.821"/>
+<line x1="160.995" y1="244.742" x2="428.176" y2="200.878"/>
+<line x1="123.252" y1="180.308" x2="391.300" y2="194.937"/>
+<line x1="181.739" y1="153.560" x2="440.340" y2="171.579"/>
+<line x1="127.875" y1="189.532" x2="395.805" y2="198.676"/>
+<line x1="130.493" y1="125.200" x2="404.231" y2="149.654"/>
+<line x1="124.447" y1="187.325" x2="395.263" y2="197.705"/>
+<line x1="150.988" y1="181.106" x2="430.510" y2="197.881"/>
+<line x1="132.292" y1="214.878" x2="408.115" y2="204.587"/>
+<line x1="138.608" y1="192.082" x2="412.289" y2="204.355"/>
+<line x1="178.648" y1="154.795" x2="437.816" y2="163.390"/>
+<line x1="138.179" y1="154.275" x2="412.006" y2="149.469"/>
+<line x1="127.444" y1="141.228" x2="404.396" y2="150.365"/>
+<line x1="138.816" y1="157.165" x2="412.746" y2="149.528"/>
+<line x1="95.110" y1="165.213" x2="385.749" y2="169.682"/>
+<line x1="81.601" y1="246.201" x2="386.218" y2="186.118"/>
+<line x1="128.648" y1="207.598" x2="401.340" y2="202.430"/>
+<line x1="144.578" y1="100.678" x2="415.097" y2="148.308"/>
+<line x1="110.721" y1="198.214" x2="389.180" y2="193.156"/>
+<line x1="145.984" y1="160.238" x2="430.486" y2="154.720"/>
+<line x1="133.002" y1="184.002" x2="404.818" y2="203.580"/>
+<line x1="162.884" y1="159.323" x2="435.306" y2="160.491"/>
+<line x1="103.855" y1="179.692" x2="386.200" y2="182.629"/>
+<line x1="140.200" y1="212.852" x2="413.934" y2="204.923"/>
+<line x1="147.835" y1="206.171" x2="421.868" y2="204.312"/>
+<line x1="172.050" y1="170.447" x2="440.481" y2="173.183"/>
+</g>
+<g fill="#547eb8" stroke="#fafbf8" stroke-width=".6">
+<circle cx="139.042" cy="166.843" r="3.1"/>
+<circle cx="129.679" cy="207.280" r="3.1"/>
+<circle cx="123.541" cy="210.716" r="3.1"/>
+<circle cx="141.045" cy="131.433" r="3.1"/>
+<circle cx="122.265" cy="198.096" r="3.1"/>
+<circle cx="155.655" cy="164.866" r="3.1"/>
+<circle cx="142.584" cy="208.636" r="3.1"/>
+<circle cx="138.005" cy="153.360" r="3.1"/>
+<circle cx="93.297" cy="192.559" r="3.1"/>
+<circle cx="74.358" cy="220.844" r="3.1"/>
+<circle cx="76.381" cy="184.993" r="3.1"/>
+<circle cx="95.907" cy="167.777" r="3.1"/>
+<circle cx="144.330" cy="183.356" r="3.1"/>
+<circle cx="53.430" cy="195.316" r="3.1"/>
+<circle cx="137.351" cy="173.147" r="3.1"/>
+<circle cx="86.975" cy="193.244" r="3.1"/>
+<circle cx="105.730" cy="204.500" r="3.1"/>
+<circle cx="175.071" cy="204.456" r="3.1"/>
+<circle cx="137.894" cy="146.931" r="3.1"/>
+<circle cx="119.158" cy="180.798" r="3.1"/>
+<circle cx="142.756" cy="174.831" r="3.1"/>
+<circle cx="97.348" cy="174.411" r="3.1"/>
+<circle cx="185.200" cy="229.603" r="3.1"/>
+<circle cx="168.219" cy="172.942" r="3.1"/>
+<circle cx="117.190" cy="108.986" r="3.1"/>
+<circle cx="164.917" cy="217.776" r="3.1"/>
+<circle cx="141.534" cy="157.393" r="3.1"/>
+<circle cx="132.581" cy="153.781" r="3.1"/>
+<circle cx="136.738" cy="154.314" r="3.1"/>
+<circle cx="187.910" cy="199.973" r="3.1"/>
+<circle cx="145.907" cy="192.752" r="3.1"/>
+<circle cx="143.327" cy="217.365" r="3.1"/>
+<circle cx="119.304" cy="183.671" r="3.1"/>
+<circle cx="169.558" cy="138.062" r="3.1"/>
+<circle cx="94.000" cy="204.018" r="3.1"/>
+<circle cx="160.995" cy="244.742" r="3.1"/>
+<circle cx="123.252" cy="180.308" r="3.1"/>
+<circle cx="181.739" cy="153.560" r="3.1"/>
+<circle cx="127.875" cy="189.532" r="3.1"/>
+<circle cx="130.493" cy="125.200" r="3.1"/>
+<circle cx="124.447" cy="187.325" r="3.1"/>
+<circle cx="150.988" cy="181.106" r="3.1"/>
+<circle cx="132.292" cy="214.878" r="3.1"/>
+<circle cx="138.608" cy="192.082" r="3.1"/>
+<circle cx="178.648" cy="154.795" r="3.1"/>
+<circle cx="138.179" cy="154.275" r="3.1"/>
+<circle cx="127.444" cy="141.228" r="3.1"/>
+<circle cx="138.816" cy="157.165" r="3.1"/>
+<circle cx="95.110" cy="165.213" r="3.1"/>
+<circle cx="81.601" cy="246.201" r="3.1"/>
+<circle cx="128.648" cy="207.598" r="3.1"/>
+<circle cx="144.578" cy="100.678" r="3.1"/>
+<circle cx="110.721" cy="198.214" r="3.1"/>
+<circle cx="145.984" cy="160.238" r="3.1"/>
+<circle cx="133.002" cy="184.002" r="3.1"/>
+<circle cx="162.884" cy="159.323" r="3.1"/>
+<circle cx="103.855" cy="179.692" r="3.1"/>
+<circle cx="140.200" cy="212.852" r="3.1"/>
+<circle cx="147.835" cy="206.171" r="3.1"/>
+<circle cx="172.050" cy="170.447" r="3.1"/>
+</g>
+<g fill="#de8b4e" stroke="#fafbf8" stroke-width=".6">
+<rect x="410.312" y="146.924" width="5.6" height="5.6" rx=".55"/>
+<rect x="402.018" y="200.780" width="5.6" height="5.6" rx=".55"/>
+<rect x="398.540" y="199.630" width="5.6" height="5.6" rx=".55"/>
+<rect x="411.465" y="146.007" width="5.6" height="5.6" rx=".55"/>
+<rect x="393.005" y="195.876" width="5.6" height="5.6" rx=".55"/>
+<rect x="432.420" y="158.011" width="5.6" height="5.6" rx=".55"/>
+<rect x="413.331" y="201.839" width="5.6" height="5.6" rx=".55"/>
+<rect x="409.041" y="146.650" width="5.6" height="5.6" rx=".55"/>
+<rect x="383.418" y="183.318" width="5.6" height="5.6" rx=".55"/>
+<rect x="386.380" y="190.356" width="5.6" height="5.6" rx=".55"/>
+<rect x="381.826" y="177.822" width="5.6" height="5.6" rx=".55"/>
+<rect x="382.645" y="168.303" width="5.6" height="5.6" rx=".55"/>
+<rect x="427.710" y="195.081" width="5.6" height="5.6" rx=".55"/>
+<rect x="381.999" y="180.236" width="5.6" height="5.6" rx=".55"/>
+<rect x="399.491" y="149.182" width="5.6" height="5.6" rx=".55"/>
+<rect x="383.053" y="182.676" width="5.6" height="5.6" rx=".55"/>
+<rect x="388.500" y="192.137" width="5.6" height="5.6" rx=".55"/>
+<rect x="432.650" y="191.288" width="5.6" height="5.6" rx=".55"/>
+<rect x="409.180" y="146.457" width="5.6" height="5.6" rx=".55"/>
+<rect x="383.208" y="179.366" width="5.6" height="5.6" rx=".55"/>
+<rect x="433.768" y="160.592" width="5.6" height="5.6" rx=".55"/>
+<rect x="382.142" y="172.456" width="5.6" height="5.6" rx=".55"/>
+<rect x="429.140" y="195.765" width="5.6" height="5.6" rx=".55"/>
+<rect x="437.681" y="170.383" width="5.6" height="5.6" rx=".55"/>
+<rect x="401.431" y="146.854" width="5.6" height="5.6" rx=".55"/>
+<rect x="425.376" y="198.078" width="5.6" height="5.6" rx=".55"/>
+<rect x="413.720" y="146.955" width="5.6" height="5.6" rx=".55"/>
+<rect x="402.850" y="147.611" width="5.6" height="5.6" rx=".55"/>
+<rect x="407.467" y="146.785" width="5.6" height="5.6" rx=".55"/>
+<rect x="435.932" y="186.286" width="5.6" height="5.6" rx=".55"/>
+<rect x="421.206" y="199.303" width="5.6" height="5.6" rx=".55"/>
+<rect x="413.193" y="202.119" width="5.6" height="5.6" rx=".55"/>
+<rect x="384.156" y="183.021" width="5.6" height="5.6" rx=".55"/>
+<rect x="427.686" y="151.920" width="5.6" height="5.6" rx=".55"/>
+<rect x="385.856" y="188.816" width="5.6" height="5.6" rx=".55"/>
+<rect x="419.068" y="201.512" width="5.6" height="5.6" rx=".55"/>
+<rect x="383.400" y="179.829" width="5.6" height="5.6" rx=".55"/>
+<rect x="435.016" y="160.590" width="5.6" height="5.6" rx=".55"/>
+<rect x="392.009" y="194.690" width="5.6" height="5.6" rx=".55"/>
+<rect x="405.599" y="146.181" width="5.6" height="5.6" rx=".55"/>
+<rect x="387.833" y="190.069" width="5.6" height="5.6" rx=".55"/>
+<rect x="436.043" y="183.052" width="5.6" height="5.6" rx=".55"/>
+<rect x="405.315" y="201.787" width="5.6" height="5.6" rx=".55"/>
+<rect x="409.489" y="201.555" width="5.6" height="5.6" rx=".55"/>
+<rect x="434.819" y="160.412" width="5.6" height="5.6" rx=".55"/>
+<rect x="409.206" y="146.669" width="5.6" height="5.6" rx=".55"/>
+<rect x="401.596" y="147.565" width="5.6" height="5.6" rx=".55"/>
+<rect x="409.946" y="146.728" width="5.6" height="5.6" rx=".55"/>
+<rect x="382.949" y="166.882" width="5.6" height="5.6" rx=".55"/>
+<rect x="391.782" y="196.405" width="5.6" height="5.6" rx=".55"/>
+<rect x="401.281" y="200.562" width="5.6" height="5.6" rx=".55"/>
+<rect x="412.297" y="145.508" width="5.6" height="5.6" rx=".55"/>
+<rect x="387.864" y="190.956" width="5.6" height="5.6" rx=".55"/>
+<rect x="420.750" y="148.878" width="5.6" height="5.6" rx=".55"/>
+<rect x="392.463" y="194.905" width="5.6" height="5.6" rx=".55"/>
+<rect x="432.506" y="157.691" width="5.6" height="5.6" rx=".55"/>
+<rect x="382.362" y="176.332" width="5.6" height="5.6" rx=".55"/>
+<rect x="411.134" y="202.123" width="5.6" height="5.6" rx=".55"/>
+<rect x="418.250" y="200.782" width="5.6" height="5.6" rx=".55"/>
+<rect x="437.540" y="168.779" width="5.6" height="5.6" rx=".55"/>
+</g>
+<text x="280" y="270" text-anchor="middle" font-size="11" fill="#647477">Links show the optimal assignment for the selected cost.</text>
+<rect x="30" y="286" width="500" height="168" rx="10" fill="#fff" stroke="#dce4e2"/>
+<text x="46" y="308" font-size="12" fill="#253b3d">Mean gap Lₙ(u)</text>
+<line x1="67.0" y1="420.000" x2="505.0" y2="420.000" stroke="#dce4e2" stroke-width=".8"/>
+<text class="tick" x="58.0" y="423.000" text-anchor="end">0</text>
+<line x1="67.0" y1="373.000" x2="505.0" y2="373.000" stroke="#dce4e2" stroke-width=".8"/>
+<text class="tick" x="58.0" y="376.000" text-anchor="end">0.025</text>
+<line x1="67.0" y1="326.000" x2="505.0" y2="326.000" stroke="#dce4e2" stroke-width=".8"/>
+<text class="tick" x="58.0" y="329.000" text-anchor="end">0.05</text>
+<line x1="286.000" y1="326.0" x2="286.000" y2="420.0" stroke="#dce4e2" stroke-dasharray="3 4"/>
+<line x1="67.000" y1="420.0" x2="67.000" y2="424.0" stroke="#647477"/>
+<text class="tick" x="67.000" y="438.0" text-anchor="middle">0</text>
+<line x1="286.000" y1="420.0" x2="286.000" y2="424.0" stroke="#647477"/>
+<text class="tick" x="286.000" y="438.0" text-anchor="middle">0.5</text>
+<line x1="505.000" y1="420.0" x2="505.000" y2="424.0" stroke="#647477"/>
+<text class="tick" x="505.000" y="438.0" text-anchor="middle">1</text>
+<text class="tick" x="517.0" y="438.0">u</text>
+<polyline points="67.000,364.872 77.950,373.830 88.900,379.716 99.850,384.688 110.800,389.518 121.750,393.974 132.700,398.076 143.650,401.756 154.600,405.064 165.550,408.087 176.500,410.814 187.450,413.266 198.400,415.621 209.350,417.798 220.300,419.074 231.250,419.800 242.200,420.000 253.150,420.000 264.100,420.000 275.050,420.000 286.000,420.000 296.950,420.000 307.900,420.000 318.850,420.000 329.800,419.996 340.750,419.967 351.700,418.916 362.650,417.063 373.600,415.094 384.550,412.890 395.500,410.647 406.450,408.347 417.400,405.970 428.350,403.392 439.300,400.382 450.250,396.788 461.200,392.981 472.150,389.150 483.100,385.251 494.050,380.809 505.000,373.901" fill="none" stroke="#087f80" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+<g fill="#087f80">
+<circle cx="67.000" cy="364.872" r="1.7"/>
+<circle cx="77.950" cy="373.830" r="1.7"/>
+<circle cx="88.900" cy="379.716" r="1.7"/>
+<circle cx="99.850" cy="384.688" r="1.7"/>
+<circle cx="110.800" cy="389.518" r="1.7"/>
+<circle cx="121.750" cy="393.974" r="1.7"/>
+<circle cx="132.700" cy="398.076" r="1.7"/>
+<circle cx="143.650" cy="401.756" r="1.7"/>
+<circle cx="154.600" cy="405.064" r="1.7"/>
+<circle cx="165.550" cy="408.087" r="1.7"/>
+<circle cx="176.500" cy="410.814" r="1.7"/>
+<circle cx="187.450" cy="413.266" r="1.7"/>
+<circle cx="198.400" cy="415.621" r="1.7"/>
+<circle cx="209.350" cy="417.798" r="1.7"/>
+<circle cx="220.300" cy="419.074" r="1.7"/>
+<circle cx="231.250" cy="419.800" r="1.7"/>
+<circle cx="242.200" cy="420.000" r="1.7"/>
+<circle cx="253.150" cy="420.000" r="1.7"/>
+<circle cx="264.100" cy="420.000" r="1.7"/>
+<circle cx="275.050" cy="420.000" r="1.7"/>
+<circle cx="286.000" cy="420.000" r="1.7"/>
+<circle cx="296.950" cy="420.000" r="1.7"/>
+<circle cx="307.900" cy="420.000" r="1.7"/>
+<circle cx="318.850" cy="420.000" r="1.7"/>
+<circle cx="329.800" cy="419.996" r="1.7"/>
+<circle cx="340.750" cy="419.967" r="1.7"/>
+<circle cx="351.700" cy="418.916" r="1.7"/>
+<circle cx="362.650" cy="417.063" r="1.7"/>
+<circle cx="373.600" cy="415.094" r="1.7"/>
+<circle cx="384.550" cy="412.890" r="1.7"/>
+<circle cx="395.500" cy="410.647" r="1.7"/>
+<circle cx="406.450" cy="408.347" r="1.7"/>
+<circle cx="417.400" cy="405.970" r="1.7"/>
+<circle cx="428.350" cy="403.392" r="1.7"/>
+<circle cx="439.300" cy="400.382" r="1.7"/>
+<circle cx="450.250" cy="396.788" r="1.7"/>
+<circle cx="461.200" cy="392.981" r="1.7"/>
+<circle cx="472.150" cy="389.150" r="1.7"/>
+<circle cx="483.100" cy="385.251" r="1.7"/>
+<circle cx="494.050" cy="380.809" r="1.7"/>
+<circle cx="505.000" cy="373.901" r="1.7"/>
+</g>
+<line x1="439.300" y1="400.382" x2="439.300" y2="420.0" stroke="#087f80" stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+<circle cx="439.300" cy="400.382" r="4.6" fill="#087f80" stroke="#fff" stroke-width="1.8"/>
+<text x="431.300" y="387.382" text-anchor="end" font-size="10" fill="#087f80">u = 0.85</text>
+<text x="280" y="478" text-anchor="middle" font-size="11" fill="#647477">Paired annulus sample · exact empirical assignments</text>
+</svg>
