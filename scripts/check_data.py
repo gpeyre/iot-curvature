@@ -53,14 +53,38 @@ for spec in tasks:
         assert error < 1e-11, (path.name, error)
         worst_oracle = max(worst_oracle, error)
 with np.load(DATA / 'annulus_assignments.npz', allow_pickle=False) as z:
-    assert z['X'].shape == (1000,2) and np.array_equal(z['u'], [.5,.9,.1])
-    assert np.array_equal(z['X'], np.random.default_rng(1000).standard_normal((1000,2)))
-    for p in z['permutations']: assert np.array_equal(np.sort(p), np.arange(1000))
-    assert np.array_equal(z['permutations'][0], np.arange(1000))
+    # Figure 4 illustrates forward OT between independent empirical marginals;
+    # Figure 3 retains paired sampling from the population transport plan.
+    X, Y, us, permutations = (z[key] for key in ('X','Y','u','permutations'))
+    spec = json.loads(str(z['spec_json']))
+    assert X.shape == Y.shape == (1000,2)
+    assert np.array_equal(us, [.5,.9,.1]) and permutations.shape == (3,1000)
+    assert int(z['seed']) == spec['seed'] == 42
+    assert spec['n'] == 1000 and spec['a'] == .8 and spec['b'] == .85
+    assert spec['sampling'] == 'independent_empirical_marginals'
+    assert spec['spec_version'] == 3
+    assert spec['computation_sha256'] == hashlib.sha256((ROOT / 'src/iot_gap/core.py').read_bytes()).hexdigest()
+    rng = np.random.default_rng(42)
+    expected_X = rng.standard_normal((1000,2))
+    radii = np.sqrt(rng.uniform(.8**2,.85**2,1000))
+    angles = rng.uniform(0,2*np.pi,1000)
+    expected_Y = np.column_stack((radii*np.cos(angles),radii*np.sin(angles)))
+    np.testing.assert_array_equal(X, expected_X)
+    np.testing.assert_allclose(Y, expected_Y, rtol=1e-14, atol=1e-14)
+    worst_arrow_objective = 0.
+    for u, p in zip(us, permutations):
+        np.testing.assert_array_equal(np.sort(p), np.arange(1000))
+        K = u*np.outer(X[:,0],Y[:,0])+(1-u)*np.outer(X[:,1],Y[:,1])
+        rows, cols = linear_sum_assignment(K, maximize=True)
+        error = abs(float(K[np.arange(1000),p].sum()-K[rows,cols].sum()))/1000
+        assert error < 1e-11, ('Figure 4', float(u), error)
+        worst_arrow_objective = max(worst_arrow_objective, error)
 result = {'passed':True, 'full_experiment_tasks':len(tasks), 'figure_assets_checked':12,
           'max_true_cost_gap':worst_center, 'max_direct_objective_error':worst_oracle,
           'max_convexity_slope_violation':worst_convexity,
-          'all_manifest_checksums_match':True, 'figure_4_paired_identity_at_true_cost':True}
+          'all_manifest_checksums_match':True,
+          'figure_4_sampling':'independent_empirical_marginals',
+          'figure_4_max_direct_objective_error':worst_arrow_objective}
 destination = ROOT / 'validation'
 destination.mkdir(exist_ok=True)
 (destination / 'data_validation.json').write_text(json.dumps(result, indent=2)+'\n')

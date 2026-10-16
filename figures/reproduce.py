@@ -35,6 +35,7 @@ from matplotlib.patches import FancyArrowPatch
 from iot_gap import annulus_map, cosine_map, gap_curve, optimal_assignment
 
 SPEC_VERSION = 2
+ARROW_SPEC_VERSION = 3
 N_LIST = [50, 100, 1000, 2000]
 DELTAS = [.01, .1, .3]
 REPS = {50: 5, 100: 5, 1000: 1, 2000: 1}
@@ -176,48 +177,81 @@ def render_annulus(specs,data,out,quick):
     save_figure(fig,out,"figure_3_annulus",quick)
 
 
+def arrow_specification(quick=False):
+    """Figure 4 is a forward experiment between independent empirical marginals."""
+    return {"n":100 if quick else 1000,"seed":42,"a":.8,"b":.85,"u":[.5,.9,.1],
+            "sampling":"independent_empirical_marginals",
+            "rng_order":"Gaussian source, uniform squared radius, uniform angle",
+            "spec_version":ARROW_SPEC_VERSION,
+            "computation_sha256":file_hash(ROOT/"src/iot_gap/core.py")}
+
+
 def render_maps(data,out,quick,render_only=False):
-    n = 100 if quick else 1000
-    X = np.random.default_rng(1000).standard_normal((n,2))
-    Y = annulus_map(X)
-    us = [.5,.9,.1]
-    arrow_spec={"n":n,"seed":1000,"rep":0,"a":.8,"b":.85,"u":us,"sampling":"paired",
-                "spec_version":SPEC_VERSION,"computation_sha256":file_hash(ROOT/"src/iot_gap/core.py")}
+    arrow_spec=arrow_specification(quick)
+    n,us=arrow_spec["n"],arrow_spec["u"]
+    rng=np.random.default_rng(arrow_spec["seed"])
+    X=rng.standard_normal((n,2))
+    # Draw the target independently, uniformly in annular area. The order of
+    # these draws is part of the reproducible forward-illustration protocol.
+    radius=np.sqrt(rng.uniform(arrow_spec["a"]**2,arrow_spec["b"]**2,n))
+    angle=rng.uniform(0,2*np.pi,n)
+    Y=np.column_stack((radius*np.cos(angle),radius*np.sin(angle)))
     encoded=json.dumps(arrow_spec,sort_keys=True)
     path=data/"annulus_assignments.npz"
     if path.exists():
         with np.load(path,allow_pickle=False) as z:
             if "spec_json" not in z or str(z["spec_json"])!=encoded:
                 raise RuntimeError(f"Assignment cache specification mismatch: {path}. Remove that file to recompute.")
-            np.testing.assert_array_equal(z["X"],X);np.testing.assert_array_equal(z["Y"],Y)
+            np.testing.assert_array_equal(z["X"],X)
+            # Trigonometric ufuncs may differ by a few ulps across platforms.
+            np.testing.assert_allclose(z["Y"],Y,rtol=1e-14,atol=1e-14)
             np.testing.assert_array_equal(z["u"],us)
+            X=z["X"].copy();Y=z["Y"].copy()
             perms=z["permutations"].copy()
             for p in perms:np.testing.assert_array_equal(np.sort(p),np.arange(n))
     else:
         if render_only:raise FileNotFoundError(f"Missing cached assignments: {path}")
         perms = np.asarray([optimal_assignment(X,Y,u) for u in us])
-        np.savez_compressed(path,X=X,Y=Y,u=np.asarray(us),permutations=perms,seed=1000,spec_json=np.asarray(encoded))
-    fig,axes = plt.subplots(1,4,figsize=(12,3.3),sharex=True,sharey=True,layout="constrained")
-    source_color = "#0072B2"; target_color="#D55E00"
-    axes[0].scatter(X[:,0],X[:,1],s=3,c=source_color,alpha=.35,rasterized=False,label=r"$X_i\sim\mathcal{N}(0,I_2)$")
-    axes[0].scatter(Y[:,0],Y[:,1],s=3,c=target_color,alpha=.6,rasterized=False,label=r"$Y_i=T(X_i)$")
-    axes[0].set_title(rf"Samples ($n={n}$)")
-    handles,labels=axes[0].get_legend_handles_labels()
-    fig.legend(handles,labels,loc="outside lower center",
-               ncol=2,frameon=False,fontsize=12,markerscale=2)
-    for ax,u,p in zip(axes[1:],us,perms):
-        # Draw every empirical assignment, not a subset or a continuous OT map.
-        ax.quiver(X[:,0],X[:,1],Y[p,0]-X[:,0],Y[p,1]-X[:,1],angles="xy",scale_units="xy",scale=1,
-            color=source_color,alpha=.16,width=.0018,headwidth=3,headlength=4)
-        ax.scatter(Y[:,0],Y[:,1],s=2,c=target_color,alpha=.45)
-        ax.set_title(rf"$u={u:g}$")
-    limit=np.ceil(2*max(np.max(np.abs(X)),np.max(np.abs(Y)))*1.05)/2
-    tick=float(np.floor(limit))
-    for ax in axes:
-        ax.set_aspect("equal"); ax.set(xlim=(-limit,limit),ylim=(-limit,limit),xlabel="$x_1$")
-        ax.set_xticks([-tick,0,tick]);ax.set_yticks([-tick,0,tick]);ax.grid(alpha=.1)
-    axes[0].set_ylabel("$x_2$")
-    save_figure(fig,out,"figure_4_annulus_maps",quick)
+        np.savez_compressed(path,X=X,Y=Y,u=np.asarray(us),permutations=perms,
+                            seed=arrow_spec["seed"],spec_json=np.asarray(encoded))
+    directions=Y[perms]-X
+    magnitudes=np.linalg.norm(directions,axis=2)
+    # One colour scale across the three candidate costs, in data coordinates.
+    norm=plt.Normalize(float(magnitudes.min()),float(magnitudes.max()))
+    cmap=plt.cm.plasma
+    with plt.rc_context({"font.family":"DejaVu Sans","font.size":10,
+                         "axes.titlesize":12,"axes.labelsize":10,
+                         "xtick.labelsize":10,"ytick.labelsize":10,
+                         "axes.spines.top":True,"axes.spines.right":True,
+                         "axes.linewidth":.8,"axes.grid":False,
+                         "savefig.bbox":None,"figure.autolayout":False,
+                         "figure.constrained_layout.use":False}):
+        # Preserve the reference figure's canvas and panel geometry. These are
+        # drawing coordinates only; the axes retain equal data-unit scales.
+        width,height=1758,443
+        fig=plt.figure(figsize=(width/100,height/100))
+        def panel(left,top,w,h):
+            return fig.add_axes([left/width,(height-top-h)/height,w/width,h/height])
+        axes=[panel(60,33,334,357),panel(494,39,323,344),
+              panel(913,39,323,344),panel(1333,39,323,344)]
+        for k,ax in enumerate(axes):
+            if k:
+                # Every arrow represents an actual empirical optimum, with no
+                # subsampling, smoothing or entropic regularization.
+                for origin,direction,magnitude in zip(X,directions[k-1],magnitudes[k-1]):
+                    ax.annotate("",xy=origin+direction,xytext=origin,
+                                arrowprops={"arrowstyle":"-|>","color":cmap(norm(magnitude)),
+                                            "lw":.9,"mutation_scale":6,"alpha":.75})
+            ax.scatter(*X.T,s=12,c="#2980b9",alpha=.3 if k==0 else .25,zorder=2)
+            ax.scatter(*Y.T,s=12,c="#e67e22",alpha=.3 if k==0 else .25,zorder=2)
+            ax.set_title("Source & Target" if k==0 else f"u= {us[k-1]:g}")
+            ax.set_aspect("equal")
+            ax.set_xlabel("x₁");ax.set_ylabel("x₂")
+        scalar=plt.cm.ScalarMappable(cmap=cmap,norm=norm)
+        scalar.set_array([])
+        colorbar=fig.colorbar(scalar,cax=panel(1680,31,18,362))
+        colorbar.set_label("Displacement magnitude",fontsize=10)
+        save_figure(fig,out,"figure_4_annulus_maps",quick)
 
 
 def render_cycles(out,quick):
@@ -261,10 +295,11 @@ def write_tables(specs,data,out,quick):
     manifest={"spec_version":SPEC_VERSION,"preview":quick,"software":versions,
       "objective":"max_permutation mean_i X_i^T diag(u,1-u) Y_perm(i) - mean_i X_i^T diag(u,1-u) Y_i",
       "solver":"SciPy linear_sum_assignment(maximize=True); exact sorted rank-one endpoints",
-      "sampling":"paired X~N(0,I2), Y=T(X); NumPy default_rng(n); repetition consumes next (n,2) array",
+      "sampling":"Loss curves: paired X~N(0,I2), Y=T(X); NumPy default_rng(n); repetition consumes next (n,2) array",
       "cosine_common_random_numbers":"The identical X for fixed (n,rep) is reused for all three epsilon values.",
       "standard_deviation":"population ddof=0; mean ± sd bands clipped below at zero; no smoothing",
-      "arrow_spec":{"n":100 if quick else 1000,"seed":1000,"rep":0,"a":.8,"b":.85,"u":[.5,.9,.1],"sampling":"paired","all_arrows":True},
+      "arrow_spec":dict(arrow_specification(quick),all_arrows=True,
+                        arrow_colours="Euclidean displacement magnitude; shared plasma scale"),
       "tasks":specs,"checksums":{}}
     files=sorted(list(data.glob("*.npz"))+list(out.glob("figure_*.*"))+[data/"gap_values.csv"])
     for p in files: manifest["checksums"][str(p.relative_to(ROOT))]=file_hash(p)

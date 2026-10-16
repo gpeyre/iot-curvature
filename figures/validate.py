@@ -67,10 +67,37 @@ def main():
             if error>1e-12:raise AssertionError(f"Original notebook discrepancy: {path.name}")
         checks["tasks"]+=1
     if checks["max_center_gap"]>1e-11:raise AssertionError("Nonzero true-parameter loss")
-    arrows=np.load(data/"annulus_assignments.npz",allow_pickle=False)
-    np.testing.assert_allclose(arrows["Y"],annulus_map(arrows["X"]),atol=0,rtol=0)
-    for permutation in arrows["permutations"]:
-        np.testing.assert_array_equal(np.sort(permutation),np.arange(len(permutation)))
+    with np.load(data/"annulus_assignments.npz",allow_pickle=False) as arrows:
+        X,Y,u,permutations=(arrows[key] for key in ("X","Y","u","permutations"))
+        arrow_spec=json.loads(str(arrows["spec_json"]))
+        if X.shape!=(1000,2) or Y.shape!=(1000,2) or permutations.shape!=(3,1000):
+            raise AssertionError("Unexpected Figure 4 sample or assignment shape")
+        np.testing.assert_array_equal(u,[.5,.9,.1])
+        if int(arrows["seed"])!=42 or arrow_spec["seed"]!=42:
+            raise AssertionError("Unexpected Figure 4 seed")
+        if arrow_spec["n"]!=1000 or arrow_spec["a"]!=.8 or arrow_spec["b"]!=.85:
+            raise AssertionError("Unexpected Figure 4 model parameters")
+        if arrow_spec["sampling"]!="independent_empirical_marginals" or arrow_spec["spec_version"]!=3:
+            raise AssertionError("Figure 4 requires the independent empirical-marginal protocol")
+        if arrow_spec["computation_sha256"]!=hashlib.sha256((ROOT/"src/iot_gap/core.py").read_bytes()).hexdigest():
+            raise AssertionError("Figure 4 numerical source checksum mismatch")
+        # Reconstruct independently of the publication renderer and paired map.
+        rng=np.random.default_rng(42)
+        expected_X=rng.standard_normal((1000,2))
+        radii=np.sqrt(rng.uniform(.8**2,.85**2,1000))
+        angles=rng.uniform(0,2*np.pi,1000)
+        expected_Y=np.column_stack((radii*np.cos(angles),radii*np.sin(angles)))
+        np.testing.assert_array_equal(X,expected_X)
+        np.testing.assert_allclose(Y,expected_Y,rtol=1e-14,atol=1e-14)
+        checks["figure_4_sampling"]="independent_empirical_marginals"
+        checks["figure_4_max_direct_objective_error"]=0.
+        for value,permutation in zip(u,permutations):
+            np.testing.assert_array_equal(np.sort(permutation),np.arange(1000))
+            K=value*np.outer(X[:,0],Y[:,0])+(1-value)*np.outer(X[:,1],Y[:,1])
+            rows,cols=linear_sum_assignment(K,maximize=True)
+            error=abs(float(K[np.arange(1000),permutation].sum()-K[rows,cols].sum()))/1000
+            checks["figure_4_max_direct_objective_error"]=max(checks["figure_4_max_direct_objective_error"],error)
+            if error>1e-11:raise AssertionError(f"Figure 4 assignment objective mismatch at u={value}: {error}")
     checks["all_checks_passed"]=True
     destination=ROOT/"validation"
     destination.mkdir(exist_ok=True)

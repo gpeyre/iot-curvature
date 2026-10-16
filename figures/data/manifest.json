@@ -10,13 +10,12 @@
   },
   "objective": "max_permutation mean_i X_i^T diag(u,1-u) Y_perm(i) - mean_i X_i^T diag(u,1-u) Y_i",
   "solver": "SciPy linear_sum_assignment(maximize=True); exact sorted rank-one endpoints",
-  "sampling": "paired X~N(0,I2), Y=T(X); NumPy default_rng(n); repetition consumes next (n,2) array",
+  "sampling": "Loss curves: paired X~N(0,I2), Y=T(X); NumPy default_rng(n); repetition consumes next (n,2) array",
   "cosine_common_random_numbers": "The identical X for fixed (n,rep) is reused for all three epsilon values.",
   "standard_deviation": "population ddof=0; mean \u00b1 sd bands clipped below at zero; no smoothing",
   "arrow_spec": {
     "n": 1000,
-    "seed": 1000,
-    "rep": 0,
+    "seed": 42,
     "a": 0.8,
     "b": 0.85,
     "u": [
@@ -24,8 +23,12 @@
       0.9,
       0.1
     ],
-    "sampling": "paired",
-    "all_arrows": true
+    "sampling": "independent_empirical_marginals",
+    "rng_order": "Gaussian source, uniform squared radius, uniform angle",
+    "spec_version": 3,
+    "computation_sha256": "9ee7d9bbd85a83812ad9af39294829f330e5cef81991f100a87949d0de01e371",
+    "all_arrows": true,
+    "arrow_colours": "Euclidean displacement magnitude; shared plasma scale"
   },
   "tasks": [
     {
@@ -3642,7 +3645,7 @@
     }
   ],
   "checksums": {
-    "figures/data/annulus_assignments.npz": "d109f060281e32e5a6bdb6e54c00ec9a112048d0c69b34505b2a7cefd3ed6ea0",
+    "figures/data/annulus_assignments.npz": "98d8a801e3c094e75a4c68519c5639a012ffb501bbe18ce16c91c408962d1643",
     "figures/data/annulus_n1000_rep0.npz": "5d5eba826561b3a99b9e7fdfcb2218db2eacee8cf55232e39aff3e5ed254d66f",
     "figures/data/annulus_n1000_rep1.npz": "be8178e95d5593cdf899088e33372b391d0ddcb5a73b14586cbd31ab627ba915",
     "figures/data/annulus_n1000_rep2.npz": "9e4b4988916e4f5baedc62a75e3e7cc95ef539a07216d4163a299d8672758740",
@@ -3709,12 +3712,12 @@
     "figures/generated/figure_3_annulus.pdf": "baf719d26546a6fb7f8887dd09426bb8d500f2a89a683dd051b8e1c6d761d547",
     "figures/generated/figure_3_annulus.png": "f6906681b3fb9d7d4e90bc7a51562fdf748ca081667428827227a53c67a8e66b",
     "figures/generated/figure_3_annulus.svg": "a6ac6d01d3bcb9a19dd686bad93b9c6b8e5233738f940d6dfea68ffb6b28a809",
-    "figures/generated/figure_4_annulus_maps.pdf": "7b0d21e749cc7acf4aa42bf62d6fce10c95b9c72935eaa60f7189cb3a8a62b52",
-    "figures/generated/figure_4_annulus_maps.png": "4e7f5011dc350bf7086984ebcf46eb25edfca5cef6f02ec5faede15a566fffa1",
-    "figures/generated/figure_4_annulus_maps.svg": "f7a0252f68158ff3b38454d2a79e22edfd40da93556a88a6e9bcbe6ca01e2d88"
+    "figures/generated/figure_4_annulus_maps.pdf": "979926d3601dbc08d51381bb458dcf95fe739e6b727b0b89d81e504534c761c1",
+    "figures/generated/figure_4_annulus_maps.png": "6a63919c674133ff6a5060434b4f1d802873b6470ed7decfe72b51697fc2bfb1",
+    "figures/generated/figure_4_annulus_maps.svg": "b6189c45d8ac4e0ba078b53093b99ebe4900bee7dfc0b6bdb9a1f0d24932f87b"
   },
   "code_checksums": {
-    "figures/reproduce.py": "c60269d8e0036315178f7ecd449482b80023bde3128dfc95a5fc285873ae8b27",
+    "figures/reproduce.py": "72f7145862df6e3d1f3cd8c2a984ac1dcea77ca1b75c939ef4589f51b9f93115",
     "src/iot_gap/core.py": "9ee7d9bbd85a83812ad9af39294829f330e5cef81991f100a87949d0de01e371",
     "figures/source/discrete_identifiability_cycles.tex": "22c9ad0a8b498a89b79f74f20d1a006e7227fd3ae349282e30dd722e68a5f115"
   }

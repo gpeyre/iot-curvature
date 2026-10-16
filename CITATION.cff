@@ -4,7 +4,7 @@ title: "Second-order geometry of optimal transport: cost identifiability and sta
 type: software
 license: MIT
 repository-code: "https://github.com/gpeyre/iot-curvature"
-url: "https://github.com/gpeyre/iot-curvature"
+url: "https://gpeyre.github.io/iot-curvature/"
 version: 0.1.0
 date-released: 2026-10-16
 authors:

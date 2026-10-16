@@ -1,5 +1,7 @@
 # Project website and interactive inverse optimal transport
 
+[Project homepage](https://gpeyre.github.io/iot-curvature/) · [Interactive demo](https://gpeyre.github.io/iot-curvature/demo.html) · [Figures](https://gpeyre.github.io/iot-curvature/#figures) · [Notebooks](https://gpeyre.github.io/iot-curvature/#resources)
+
 A static, dependency-free companion to *Second-order geometry of optimal transport: cost identifiability and stability*. The homepage, `index.html`, introduces the project and links to the demo, article figures, Jupyter notebooks and repository source. The interactive experiment is in `demo.html`.
 
 No installation, build step or backend is needed. All required assets are committed in this directory. The site does not upload experiment data or load external fonts, scripts or services; links to GitHub open the corresponding repository content.
@@ -21,9 +23,12 @@ After uploading the repository to `gpeyre/iot-curvature`:
 1. Open the repository's **Settings → Pages**.
 2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
 3. Choose branch **`main`**, folder **`/docs`**, then click **Save**.
-4. Wait for the Pages deployment to succeed. The settings page displays the published address and deployment status.
+4. Leave this project's **Custom domain** blank and do not add a `CNAME` file.
+5. Wait for the Pages deployment to succeed. The settings page displays the published address and deployment status.
 
 The intended homepage is <https://gpeyre.github.io/iot-curvature/> and the demo is <https://gpeyre.github.io/iot-curvature/demo.html>. These addresses become available when the first deployment succeeds; this repository does not enable Pages on your behalf. Once enabled, later pushes to `main` update the site. Relative asset and navigation links support the `/iot-curvature/` project subpath.
+
+All project links and canonical URLs use `gpeyre.github.io`. GitHub Pages can inherit a custom domain from the account's user site even when this repository has no `CNAME`. If Pages redirects the project to a personal domain, removing that inherited domain requires changing the user-site Pages setting; editing project links alone does not change the hosting redirect. See [GitHub's domain inheritance documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages). Review that account-wide setting separately because it also affects the user site and other project sites.
 
 ## What is computed
 

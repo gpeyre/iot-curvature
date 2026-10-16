@@ -17,6 +17,7 @@ authors = [
 dependencies = ["numpy>=1.26", "scipy>=1.11", "matplotlib>=3.8"]
 
 [project.urls]
+Homepage = "https://gpeyre.github.io/iot-curvature/"
 Repository = "https://github.com/gpeyre/iot-curvature"
 Issues = "https://github.com/gpeyre/iot-curvature/issues"
 
